@@ -3,12 +3,13 @@
 ## Démarrage de l'application
 
 ```
-
-npm init // fill the required things CLI asked
+// Répondre aux questions posées
+npm init
+// Installation de express
 npm i express
+// Installation de mocha et supertest en mode dev
 npm i mocha supertest --save-dev
 ```
-
 
 * express: Node framework
 * mocha: Test framework for NodeJS ( You can choose another testing framework if you wish like Jasmin, Jest, Tape, etc.)
@@ -16,7 +17,7 @@ npm i mocha supertest --save-dev
 * supertest: Provide a high-level abstraction for testing HTTP
 
 ```
-
+// Installation des dépendances
 npm install
 ```
 
@@ -85,5 +86,6 @@ Server is running
 
 
   1 passing (23ms)
-
 ```
+
+[Source](https://chathula.dev/how-to-set-up-a-ci-cd-pipeline-for-a-node-js-app-with-github-actions)

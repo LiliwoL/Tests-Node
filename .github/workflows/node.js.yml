@@ -1,30 +1,61 @@
 name: Node Github CI
 
+# Ce Workflow s'applique à quels événements GitHub?
+# Ici à un PUSH dans la branche MASTER
 on:
   push:
     branches:
       - master
 
+# Jobs à exécuter
 jobs:
+  # Test
   test:
-
+    # Sur quel environnement on teste?
+    # Ca peut être Windows, Mac si on le souhaite
     runs-on: ubuntu-latest
 
+    # Stratégie de test sur plusieurs versions de node
     strategy:
       matrix:
         node-version: [8.x, 10.x, 12.x]
 
+    # Tâches à effectuer dans ce job
     steps:
+    # Là, on va faire un checkout du dépôt
     - uses: actions/checkout@v2
+    # Nom pour cette tâche
     - name: Use Node.js ${{ matrix.node-version }}
+      # L'action sera de mettre en place Node à la version donnée plus bas (node-version)
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+
+    # Nom pour cette tâche
     - name: npm install and test
+    # Commandes exécutées
       run: |
         npm install
         npm test
+    # Variables d'environnement
       env:
         CI: true
 
-  
+# Autre job pour le déploiement
+  #deploy:
+  #  needs: [test]
+  #  runs-on: ubuntu-latest
+
+  #  steps:
+  #  - name: SSH and deploy node app
+  #    uses: appleboy/ssh-action@master
+  #    with:
+  #      host: ${{ secrets.SSH_HOST }}
+  #      username: ${{ secrets.SSH_USERNAME }}
+  #      key: ${{ secrets.SSH_KEY }}
+  #      port: ${{ secrets.SSH_PORT }}
+  #      script: |
+  #        cd ~/node-github-demo
+  #        git pull origin master
+  #        npm install --production
+  #        pm2 restart node-app
