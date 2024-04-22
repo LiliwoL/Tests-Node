@@ -1,30 +1,37 @@
-# Node App
+# Tester une application Node
 
-## Démarrage de l'application
+## Préparation de l'application
 
-```
-// Répondre aux questions posées
+```bash
 npm init
-// Installation de express
+# Répondre aux questions posées
+
+# Installation de express
 npm i express
-// Installation de mocha et supertest en mode dev
+
+# Installation des dépendances mocha et supertest pour les tests uniquement en mode développement
 npm i mocha supertest --save-dev
 ```
 
-* express: Node framework
-* mocha: Test framework for NodeJS ( You can choose another testing framework if you wish like Jasmin, Jest, Tape, etc.)
+## Dépendances
 
-* supertest: Provide a high-level abstraction for testing HTTP
+* **express**: Node framework
+* **mocha**: Test framework for NodeJS
+  * Il existe aussi Jasmin, Jest, Tape, etc.
+* **supertest**: Haut niveau d'abstraction pour tester le HTTP
 
-```
-// Installation des dépendances
+```bash
+# Installation des dépendances (en utilisant le fichier package.json)
 npm install
 ```
 
+---
+
+# Application
 
 ## index.js
 
-```
+```js
 // importing express framework
 const express = require("express");
 
@@ -43,17 +50,21 @@ app.listen(process.env.PORT || 7000, () => {
 module.exports = app;
 ```
 
+---
+
 ## Exécution
 
-```
+```bash
 node index.js
 ```
 
-## Ecriture des tests
+---
+
+## Ecriture des tests
 
 Dans le dossier *test/* on crée un fichier *test.js*
 
-```
+```js
   const request = require("supertest");
     const app = require("../index");
 
@@ -64,11 +75,13 @@ Dans le dossier *test/* on crée un fichier *test.js*
     });
 ```
 
+---
+
 ## Exécution des tests
 
 Modification de la section **scripts** dans le fichier *package.json*
 
-```
+```json
 "scripts": {
     "test": "mocha ./test/* --exit"
 }
@@ -76,7 +89,7 @@ Modification de la section **scripts** dans le fichier *package.json*
 
 On n'a plus qu'à taper
 
-```
+```bash
 npm test
 Server is running
 
